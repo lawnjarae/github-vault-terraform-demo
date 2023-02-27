@@ -38,3 +38,4 @@ build
 .classpath
 .project
 .settings
+*.txt
