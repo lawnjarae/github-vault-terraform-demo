@@ -1,7 +1,26 @@
-Are you using GitHub for your code repo and looking to add CI/CD governance to your application development and delivery process? In this demo, learn how HashiCorp can secure and accelerate your CI/CD pipelines with the HashiCorp Cloud Platform on top of GitHub. 
+# Exampleapp in Ruby
 
-We'll cover:
-* The HashiCorp Cloud Operating Model and why platform teams are at the heart of CI/CD governance
-* How to leverage GitHub Actions with HCP Vault to easily and securely retrieve secrets stored in HCP Vault
-* Accelerated delivery with Terraform Cloud and GitHub Actions to initiate Terraform commands
-* CI/CD Governance Best Practices for IaaS delivery
+These assets are provided to perform the tasks described in the [Vault GitHub
+Action](https://learn.hashicorp.com/tutorials/vault/github-actions) tutorial.
+
+## Docker Image
+
+Create a Docker image for the application and label it
+`vault-action-exampleapp`.
+
+```shell
+$ docker build . --file Dockerfile -t vault-action-exampleapp
+```
+
+View the contents of the app_secret file in the Docker image.
+
+```shell
+$ docker run vault-action-exampleapp /bin/bash -c "cat ./app_secret"
+```
+
+Create a Docker image for the application and label it
+`vault-action-exampleapp` and override the secret.
+
+```shell
+$ docker build . --file Dockerfile --build-arg app_secret="SECRET_OVERRIDE" -t vault-action-exampleapp
+```
