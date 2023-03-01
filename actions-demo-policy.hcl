@@ -1,3 +1,3 @@
-path "actions-demo/*" {
+path "kv/data/actions-demo/*" {
   capabilities = ["read"]
 }
