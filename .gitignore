@@ -39,3 +39,6 @@ build
 .project
 .settings
 *.txt
+
+# Don't include the GitHub runner
+actions-runner/

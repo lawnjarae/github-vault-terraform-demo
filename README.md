@@ -24,3 +24,8 @@ Create a Docker image for the application and label it
 ```shell
 $ docker build . --file Dockerfile --build-arg app_secret="SECRET_OVERRIDE" -t vault-action-exampleapp
 ```
+
+
+## Additional Vault GitHub Actions
+
+You can find detailed documentation [here](https://github.com/hashicorp/vault-action). These docs go over the various authenticaion methods and show the syntax for retreiving secrets.
