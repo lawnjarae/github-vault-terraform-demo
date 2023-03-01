@@ -10,10 +10,10 @@ jobs:
         uses: hashicorp/vault-action@v2
         with:
           method: approle
-          role_id: ${{ secrets.VAULT_ROLE_ID }}
-          secret_id: ${{ secrets.VAULT_SECRET_ID }}
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
           url: ${{ secrets.VAULT_URL }}
-          namepsace: admin/demo-namespace
+          namespace: admin/demo-namespace
           secrets: |
             kv/data/actions-demo/ci app_secret
       - name: Build Docker Image
