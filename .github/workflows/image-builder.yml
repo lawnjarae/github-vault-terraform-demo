@@ -12,7 +12,7 @@ jobs:
       - name: Build Original Docker Image
         run: |
           docker build . --file Dockerfile -t vault-action-exampleapp
-          docker run -rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
+          docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
       - name: Import Secrets
         uses: hashicorp/vault-action@v2
         with:
@@ -25,4 +25,4 @@ jobs:
       - name: Build New Docker Image
         run: |
           docker build . --file Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
-          docker run -rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
+          docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
