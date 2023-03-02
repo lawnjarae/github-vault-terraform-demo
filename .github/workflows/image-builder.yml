@@ -9,6 +9,10 @@ jobs:
       contents: read  # This is required for actions/checkout
     steps:
       - uses: actions/checkout@v2
+      - name: Build Original Docker Image
+        run: |
+          docker build . --file Dockerfile -t vault-action-exampleapp
+          docker run -rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
       - name: Import Secrets
         uses: hashicorp/vault-action@v2
         with:
@@ -18,5 +22,7 @@ jobs:
           namespace: admin/demo-namespace
           secrets: |
             kv/data/actions-demo/ci app_secret
-      - name: Build Docker Image
-        run: docker build . --file Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
+      - name: Build New Docker Image
+        run: |
+          docker build . --file Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
+          docker run -rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
