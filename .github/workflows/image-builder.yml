@@ -10,9 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Original Docker Image
-        run: |
-          docker image rm vault-action-exampleapp; exit 0
-          docker build . --file Dockerfile -t vault-action-exampleapp
+        run: docker build . --file Dockerfile -t vault-action-exampleapp
       - name: Output original secret
         run: docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
       - name: Import Secrets
