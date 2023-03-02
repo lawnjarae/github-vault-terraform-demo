@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build Original Docker Image
-        run: |
-          docker build . --file Dockerfile -t vault-action-exampleapp
-          docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
+        run: docker build . --file Dockerfile -t vault-action-exampleapp
+      - name: Output original secret
+        run: docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
       - name: Import Secrets
         uses: hashicorp/vault-action@v2
         with:
@@ -23,6 +23,6 @@ jobs:
           secrets: |
             kv/data/actions-demo/ci app_secret
       - name: Build New Docker Image
-        run: |
-          docker build . --file Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
-          docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
+        run: docker build . --file Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
+      - name: Output HVP Vault secret
+        run: docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
