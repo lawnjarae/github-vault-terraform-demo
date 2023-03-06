@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_s3_bucket" "bucket" {
   bucket = var.bucket_name
   # Block public access to the bucket and its contents
-  #   block_public_acls       = true
+  block_public_acls = true
   #   block_public_policy     = true
   #   ignore_public_acls      = true
   #   restrict_public_buckets = true
