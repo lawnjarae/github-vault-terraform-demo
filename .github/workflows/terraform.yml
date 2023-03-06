@@ -14,6 +14,9 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: s3_bucket
     permissions:
       pull-requests: write
     steps:
