@@ -5,7 +5,7 @@ variable "bucket_name" {
 }
 
 variable "acl" {
-  description = "(Optional) The canned ACL to apply. Conflicts with `grant`"
+  description = "(Optional) The canned ACL to apply. Conflicts with `grant`."
   type        = string
   default     = null
 }
