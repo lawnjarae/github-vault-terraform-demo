@@ -1,0 +1,31 @@
+name: ImageBuilder-OIDC
+# Run this workflow every time a new commit pushed to the repository
+on:
+  push:
+    paths:
+      - 'hcp_vault/**'
+jobs:
+  build:
+    runs-on: self-hosted
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read  # This is required for actions/checkout
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Original Docker Image
+        run: docker build hcp_vault --file hcp_vault/Dockerfile -t vault-action-exampleapp
+      - name: Output original secret
+        run: docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v2
+        with:
+          method: jwt
+          role: ${{ secrets.VAULT_OIDC_ROLE }}
+          url: ${{ secrets.VAULT_URL }}
+          namespace: admin/demo-namespace
+          secrets: |
+            kv/data/actions-demo/ci app_secret
+      - name: Build New Docker Image
+        run: docker build hcp_vault --file hcp_vault/Dockerfile --build-arg app_secret="${{ env.APP_SECRET }}" -t vault-action-exampleapp
+      # - name: Output HVP Vault secret
+      #   run: docker run --rm vault-action-exampleapp /bin/bash -c "cat ./app_secret"
