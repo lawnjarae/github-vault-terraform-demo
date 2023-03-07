@@ -4,7 +4,7 @@ provider "vault" {
 
 resource "vault_namespace" "demo_namespace" {
   namespace = "admin"
-  path      = "testing-namespace"
+  path      = "demo-namespace"
 }
 
 resource "vault_mount" "kvv2" {
@@ -28,17 +28,20 @@ resource "vault_kv_secret_v2" "example" {
 
 resource "vault_policy" "actions_demo_policy" {
   name = "actions-demo-policy"
+  namespace = vault_namespace.demo_namespace.path_fq
 
   policy = file("actions-demo-policy.hcl")
 }
 
 resource "vault_jwt_auth_backend" "jwt" {
+  namespace = vault_namespace.demo_namespace.path_fq
   path               = "jwt"
   oidc_discovery_url = "https://token.actions.githubusercontent.com"
   bound_issuer       = "https://token.actions.githubusercontent.com"
 }
 
 resource "vault_jwt_auth_backend_role" "jwt_role" {
+  namespace = vault_namespace.demo_namespace.path_fq
   backend   = vault_jwt_auth_backend.jwt.path
   role_name = "gha-oidc-role"
 

@@ -22,7 +22,7 @@ jobs:
           method: jwt
           role: ${{ secrets.VAULT_OIDC_ROLE }}
           url: ${{ secrets.VAULT_URL }}
-          namespace: admin/testing-namespace
+          namespace: admin/demo-namespace
           secrets: |
             kv/data/actions-demo/ci app_secret
       - name: Build New Docker Image
