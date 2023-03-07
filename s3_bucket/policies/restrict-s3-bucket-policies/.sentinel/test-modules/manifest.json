@@ -1,0 +1,28 @@
+{
+	"records": [
+		{
+			"key": "test/restrict-s3-bucket-policies/success/tfconfig-functions",
+			"source": "../../../common-functions/tfconfig-functions/tfconfig-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/jjarae/source/demo/github-vault-terraform-demo/s3_bucket/policies/common-functions/tfconfig-functions/tfconfig-functions.sentinel"
+		},
+		{
+			"key": "test/restrict-s3-bucket-policies/failure/tfconfig-functions",
+			"source": "../../../common-functions/tfconfig-functions/tfconfig-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/jjarae/source/demo/github-vault-terraform-demo/s3_bucket/policies/common-functions/tfconfig-functions/tfconfig-functions.sentinel"
+		},
+		{
+			"key": "test/restrict-s3-bucket-policies/failure/tfplan-functions",
+			"source": "../../../common-functions/tfplan-functions/tfplan-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/jjarae/source/demo/github-vault-terraform-demo/s3_bucket/policies/common-functions/tfplan-functions/tfplan-functions.sentinel"
+		},
+		{
+			"key": "test/restrict-s3-bucket-policies/success/tfplan-functions",
+			"source": "../../../common-functions/tfplan-functions/tfplan-functions.sentinel",
+			"sourceSum": "",
+			"dest": "/Users/jjarae/source/demo/github-vault-terraform-demo/s3_bucket/policies/common-functions/tfplan-functions/tfplan-functions.sentinel"
+		}
+	]
+}

@@ -1,0 +1,165 @@
+import "strings"
+
+providers = {
+	"aws": {
+		"alias": "",
+		"config": {
+			"region": {
+				"constant_value": "us-east-1",
+			},
+		},
+		"full_name":           "registry.terraform.io/hashicorp/aws",
+		"module_address":      "",
+		"name":                "aws",
+		"provider_config_key": "aws",
+		"version_constraint":  "~> 4.0",
+	},
+}
+
+resources = {
+	"aws_s3_bucket.bucket": {
+		"address": "aws_s3_bucket.bucket",
+		"config": {
+			"bucket": {
+				"references": [
+					"var.bucket_name",
+				],
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "bucket",
+		"provider_config_key": "aws",
+		"provisioners":        [],
+		"type":                "aws_s3_bucket",
+	},
+	"aws_s3_bucket_acl.acl_policy": {
+		"address": "aws_s3_bucket_acl.acl_policy",
+		"config": {
+			"acl": {
+				"references": [
+					"var.acl",
+				],
+			},
+			"bucket": {
+				"references": [
+					"aws_s3_bucket.bucket.id",
+					"aws_s3_bucket.bucket",
+				],
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "acl_policy",
+		"provider_config_key": "aws",
+		"provisioners":        [],
+		"type":                "aws_s3_bucket_acl",
+	},
+	"aws_s3_bucket_public_access_block.access_block": {
+		"address": "aws_s3_bucket_public_access_block.access_block",
+		"config": {
+			"block_public_acls": {
+				"constant_value": true,
+			},
+			"block_public_policy": {
+				"constant_value": true,
+			},
+			"bucket": {
+				"references": [
+					"aws_s3_bucket.bucket.id",
+					"aws_s3_bucket.bucket",
+				],
+			},
+			"ignore_public_acls": {
+				"constant_value": true,
+			},
+			"restrict_public_buckets": {
+				"constant_value": true,
+			},
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "access_block",
+		"provider_config_key": "aws",
+		"provisioners":        [],
+		"type":                "aws_s3_bucket_public_access_block",
+	},
+	"aws_s3_bucket_versioning.bucket_versioning": {
+		"address": "aws_s3_bucket_versioning.bucket_versioning",
+		"config": {
+			"bucket": {
+				"references": [
+					"aws_s3_bucket.bucket.id",
+					"aws_s3_bucket.bucket",
+				],
+			},
+			"versioning_configuration": [
+				{
+					"status": {
+						"constant_value": "Enabled",
+					},
+				},
+			],
+		},
+		"count":               {},
+		"depends_on":          [],
+		"for_each":            {},
+		"mode":                "managed",
+		"module_address":      "",
+		"name":                "bucket_versioning",
+		"provider_config_key": "aws",
+		"provisioners":        [],
+		"type":                "aws_s3_bucket_versioning",
+	},
+}
+
+provisioners = {}
+
+variables = {
+	"acl": {
+		"default":        null,
+		"description":    "(Optional) The canned ACL to apply. Conflicts with `grant`",
+		"module_address": "",
+		"name":           "acl",
+	},
+	"bucket_name": {
+		"default":        null,
+		"description":    "(Optional, Forces new resource) The name of the bucket. If omitted, Terraform will assign a random, unique name.",
+		"module_address": "",
+		"name":           "bucket_name",
+	},
+	"policy": {
+		"default":        null,
+		"description":    "(Optional) A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide.",
+		"module_address": "",
+		"name":           "policy",
+	},
+	"tags": {
+		"default":        {},
+		"description":    "(Optional) A mapping of tags to assign to the bucket.",
+		"module_address": "",
+		"name":           "tags",
+	},
+}
+
+outputs = {}
+
+module_calls = {}
+
+strip_index = func(addr) {
+	s = strings.split(addr, ".")
+	for s as i, v {
+		s[i] = strings.split(v, "[")[0]
+	}
+
+	return strings.join(s, ".")
+}
