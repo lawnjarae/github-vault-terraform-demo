@@ -1,7 +1,11 @@
 
 # Bootstrapping trust between a TFC workspace and AWS
 
-This code was forked from [HashiCorp's repo](https://github.com/hashicorp/terraform-dynamic-credentials-setup-examples/tree/main/aws).
+This code was forked from [HashiCorp's repo](https://github.com/hashicorp/terraform-dynamic-credentials-setup-examples/tree/main/aws). 
+
+This code will configure trust between an already existing workspace specified by `tfc_workspace_name`. If you do not have a workspace and want one created, you can comment out the `tfe_workspace data` block in `tfc-workspace.tf` and uncomment the `tfe_workspace resource` block 
+
+---
 
 This directory contains example code for setting up a Terraform Cloud workspace whose runs will be automatically authenticated to AWS using Workload Identity.
 
