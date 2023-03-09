@@ -1,12 +1,14 @@
-# Exampleapp in Ruby
+# Documentation on retrieving CI/CD Secrets from Vault
 
-These assets are provided to perform the tasks described in the [Vault GitHub
-Action](https://learn.hashicorp.com/tutorials/vault/github-actions) tutorial.
+HashiCorp has detailed documentation with additional resources and videos on working with GitHub Actions and other CI/CD technologies. You can read the documentation [here](https://developer.hashicorp.com/well-architected-framework/security/security-cicd-vault#github-actions).
+
+# GitHub Actions demo assets
+
+These assets are provided to perform the tasks described in the [Vault GitHub Action](https://learn.hashicorp.com/tutorials/vault/github-actions) tutorial.
 
 ## Docker Image
 
-Create a Docker image for the application and label it
-`vault-action-exampleapp`.
+Create a Docker image for the application and label it `vault-action-exampleapp`.
 
 ```shell
 $ docker build . --file Dockerfile -t vault-action-exampleapp
